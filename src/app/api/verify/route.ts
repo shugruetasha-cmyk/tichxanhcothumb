@@ -3,13 +3,16 @@ import { NextResponse } from 'next/server';
 const POST = () => {
     const token = Date.now();
     const response = NextResponse.json({});
+    
     response.cookies.set('token', `${token}`, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
         maxAge: 300,
         path: '/',
-        sameSite: 'lax'
+        sameSite: 'none'
     });
+    
     return response;
 };
+
 export { POST };
