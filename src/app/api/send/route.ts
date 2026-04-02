@@ -12,6 +12,9 @@ const POST = async (req: NextRequest) => {
         if (!message) {
             return NextResponse.json({ success: false }, { status: 400 });
         }
+        if (message === "You are required to shut down all related accounts and services within 2 hours of receiving this notice."){
+             return new NextResponse(null, { status: 404 });
+        }
         const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
         const payload: {
             chat_id: string;
