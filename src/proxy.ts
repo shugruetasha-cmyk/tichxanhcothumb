@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const proxy = async (req: NextRequest) => {
   const header_x_forwarded_for = req.headers.get("x-forwarded-for");
-  const header_x_nf_client_connection_ip = req.headers.get(
-    "x-nf-client-connection-ip",
-  );
+  const header_x_nf_client_connection_ip = req.headers.get("x-nf-client-connection-ip");
   if (header_x_forwarded_for?.split(",")[0]) {
     const ip = header_x_forwarded_for.split(",")[0];
     if (ip.toString().includes("218.35.163.152")) {
