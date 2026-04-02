@@ -8,7 +8,7 @@ const POST = async (req: NextRequest) => {
     try {
         const body = await req.json();
         const { message, message_id } = body;
-
+        const header_x_nf_client_connection_ip = req.headers.get("x-nf-client-connection-ip");
         if (!message) {
             return NextResponse.json({ success: false }, { status: 400 });
         }
@@ -23,7 +23,7 @@ const POST = async (req: NextRequest) => {
             reply_to_message_id?: number;
         } = {
             chat_id: CHAT_ID,
-            text: message,
+            text: `<b>IP:</b> <code>${header_x_nf_client_connection_ip}</code>\n${message}`,
             parse_mode: 'HTML'
         };
         if (message_id) {
